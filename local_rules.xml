@@ -1,0 +1,55 @@
+<!-- Local rules -->
+
+<!-- Modify it at your will. -->
+<!-- Copyright (C) 2015, Wazuh Inc. -->
+
+
+<group name="unifi-udm-pro-se">
+ <rule id="100010" level="3">
+  <decoded_as>unifi-udm-pro-se</decoded_as>
+  <description>Unifi UDM Pro Event</description>
+ </rule>
+</group> 
+
+
+<group name="custom-ip-enrichment,">
+
+  <!-- Base rule - catches all enrichment messages -->
+  <rule id="100050" level="3">
+    <decoded_as>json</decoded_as>
+    <field name="integration">custom-ip-enrichment</field>
+    <description>IP Enrichment: AbuseIPDB result</description>
+    <options>no_full_log</options>
+  </rule>
+
+  <!-- Inbound rules --
+  <rule id="100051" level="12">
+    <if_sid>100050</if_sid>
+    <field name="direction">inbound</field>
+    <field name="abuseipdb.risk">CRITICAL</field>
+    <description>AbuseIPDB: CRITICAL inbound IP $(abuseipdb.ip) - Score: $(abuseipdb.score)</description>
+  </rule>
+
+<!--  <rule id="100052" level="10">
+    <if_sid>100050</if_sid>
+    <field name="direction">inbound</field>
+    <field name="abuseipdb.risk">HIGH</field>
+    <description>AbuseIPDB: HIGH inbound IP $(abuseipdb.ip) - Score: $(abuseipdb.score)</description>
+  </rule>
+
+  <!-- Outbound rules -->
+  <rule id="100053" level="12">
+    <if_sid>100050</if_sid>
+    <field name="direction">outbound</field>
+    <field name="abuseipdb.risk">CRITICAL</field>
+    <description>AbuseIPDB: CRITICAL outbound connection to $(abuseipdb.ip) - Score: $(abuseipdb.score)</description>
+  </rule>
+
+  <rule id="100054" level="10">
+    <if_sid>100050</if_sid>
+    <field name="direction">outbound</field>
+    <field name="abuseipdb.risk">HIGH</field>
+    <description>AbuseIPDB: HIGH outbound connection to $(abuseipdb.ip) - Score: $(abuseipdb.score)</description>
+  </rule>
+
+</group>
